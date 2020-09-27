@@ -38,6 +38,7 @@ function UploadProductPage() {
     }
 
     const updateImages = (newImages) => {
+        // console.log(newImages)
         setImages(newImages)
     }
 
