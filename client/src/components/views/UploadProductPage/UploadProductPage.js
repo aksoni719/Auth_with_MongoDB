@@ -1,3 +1,4 @@
+import Axios from 'axios'
 import React, { useState } from 'react'
 import FileUpload from '../../utils/FileUpload'
 
@@ -12,7 +13,7 @@ const Continents = [
 ]
 
 
-function UploadProductPage() {
+function UploadProductPage(props) {
 
     const [TitleValue, setTitleValue] = useState("")
     const [DescriptionValue, setDescriptionValue] = useState("")
@@ -42,6 +43,34 @@ function UploadProductPage() {
         setImages(newImages)
     }
 
+    const onSubmit = (event) =>{
+        event.preventDefault();
+
+        if(!TitleValue || !DescriptionValue || !PriceValue || !ContinentValue || !Images){
+            return alert('Fill all the fields first!')
+        }
+
+        const variables = {
+            writer: props.user.userData._id,
+            title: TitleValue,
+            description: DescriptionValue,
+            price: PriceValue,
+            images: Images,
+            continents: ContinentValue
+        }
+
+        Axios.post('/api/product/uploadProduct', variables)
+             .then(response => {
+                 if(response.data.success) {
+                        alert('Product Successfully uploaded')
+                        props.history.push('/')
+                 } else {
+                     alert('Failed to upload product')
+                 }
+             })
+
+    }
+
     return (
         <div style={{ maxWidth:'700px', margin:'2rem auto' }}>
             <div style={{ textAlign:'center',marginBottom:'2rem' }}>
@@ -49,7 +78,7 @@ function UploadProductPage() {
             </div>
 
 
-            <form onSubmit >
+            <form onSubmit={onSubmit} >
 
             <FileUpload refreshFunction={updateImages} />
 
@@ -88,7 +117,7 @@ function UploadProductPage() {
                 </select>
 
                     <button 
-                    onClick
+                    onClick={onSubmit}
                     >
                     Submit
                     </button>

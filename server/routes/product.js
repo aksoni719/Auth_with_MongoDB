@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { Product } = require('../models/Product')
 const multer = require('multer')
 
 
@@ -40,6 +41,30 @@ router.post("/uploadImage", auth, (req, res) => {
     })
 
 });
+
+router.post("/uploadProduct", auth, (req, res) => {
+    
+    // save the data that we got from the client to the DataBase
+   const product = new Product(req.body)
+
+   product.save((err) => {
+       if(err) return res.status(400).json({ success: false, err })
+       return res.status(200).json({success: true})
+   })
+
+});
+
+router.post("/getProducts", auth, (req, res) => {
+ 
+    Product.find()
+    .exec((err, products ) => {
+        if(err) return res.status(400).json({ success: false, err })
+        res.status(200).json({success: true, products })
+    })
+
+
+});
+
 
 
 module.exports = router;
