@@ -4,11 +4,11 @@ import FileUpload from '../../utils/FileUpload'
 
 
 const Continents = [
-    {key:1, value: "bangalore"},
-    {key:2, value: "pune"},
-    {key:3, value: "delhi"},
-    {key:4, value: "ranchi"},
-    {key:5, value: "chennai"},
+    {key:1, value: "Bangalore"},
+    {key:2, value: "Pune"},
+    {key:3, value: "Delhi"},
+    {key:4, value: "Ranchi"},
+    {key:5, value: "Chennai"},
     {key:6, value: "Goa"},
 ]
 
