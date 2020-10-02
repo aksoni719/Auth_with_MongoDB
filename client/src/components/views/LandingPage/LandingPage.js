@@ -4,6 +4,7 @@ import { Card, Col, Row } from 'antd'
 import ImageSlider from '../../utils/ImageSlider'
 import CheckBox from './Sections/CheckBox'
 import Meta from 'antd/lib/card/Meta'
+import RadioBox from './Sections/RadioBox'
 
 function LandingPage() {
     //Product State
@@ -112,7 +113,7 @@ function LandingPage() {
 
         if(category === "price")
         {
-
+            
         }
 
         showFilterResults(newFilters)
@@ -126,10 +127,25 @@ function LandingPage() {
                 <h2>Select The Leads</h2>
             </div>
 
-            {/* Filter Checkbox */}
-            <CheckBox
-                handleFilters = {filters => handleFilters(filters, "continents")}
-             />
+
+            <Row gutter={[16, 16]} >
+                <Col lg={12} xs={24}>
+                    {/* Filter Checkbox */}
+                    <CheckBox
+                        handleFilters = {filters => handleFilters(filters, "continents")}
+                    />
+                </Col>
+                <Col lg={12} xs={24}>
+                    {/* RadioBox */}
+                    <RadioBox 
+                        handleFilters = {filters => handleFilters(filters, "price")}
+                    />
+                </Col>
+            </Row>
+
+            
+
+            
 
 
             {Products.length==0 ?
